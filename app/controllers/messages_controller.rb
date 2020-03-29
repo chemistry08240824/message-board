@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destro]
   
     def index
-        @messages=Message.all
+        @messages=Message.order(id: :desc).all.page(params[:page]).per(10)
     end
     
     def show
@@ -55,6 +55,6 @@ class MessagesController < ApplicationController
     
     def message_params
     params.require(:message).permit(:content, :title)
-  end
+    end
         
 end
